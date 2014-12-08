@@ -1,0 +1,11 @@
+Package: conformist
+Title: Utilities for conforming data to predefined standards
+Description: 
+Version: 0.1
+Imports:
+  lettercase (>= 0.1)
+Authors@R: # getOptions('devtools.desc.author')
+Depends: R (>= 3.0.2)
+License: # getOptions('devtools.desc.license')
+LazyData: true
+
