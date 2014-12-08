@@ -1,11 +1,13 @@
 Package: conformist
 Title: Utilities for conforming data to predefined standards
-Description: 
+Description: Utilities for conforming data to flexible, predefined standards
+    such a the lettercase for names, types for columns etc.
 Version: 0.1
-Imports:
+Imports: 
   lettercase (>= 0.1)
-Authors@R: # getOptions('devtools.desc.author')
+Author: Christopher Brown
+Maintainer: Christopher Brown <chris.brown@decisionpatterns.com>
 Depends: R (>= 3.0.2)
-License: # getOptions('devtools.desc.license')
+License: GPL-2
 LazyData: true
-
+Suggests: testthat
