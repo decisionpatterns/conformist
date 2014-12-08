@@ -3,11 +3,14 @@ Title: Utilities for conforming data to predefined standards
 Description: Utilities for conforming data to flexible, predefined standards
     such a the lettercase for names, types for columns etc.
 Version: 0.1
-Imports: 
-  lettercase (>= 0.1)
+Imports:
+    lettercase (>= 0.1)
 Author: Christopher Brown
 Maintainer: Christopher Brown <chris.brown@decisionpatterns.com>
-Depends: R (>= 3.0.2)
+Depends:
+    R (>= 3.0.2)
+Suggests:
+    testthat,
+    data.table (>= 1.9.4)
 License: GPL-2
 LazyData: true
-Suggests: testthat
