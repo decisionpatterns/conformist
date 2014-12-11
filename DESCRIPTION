@@ -5,7 +5,7 @@ Description: Utilities for conforming data to flexible, predefined standards
 Version: 0.1
 Imports:
     lettercase (>= 0.1)
-Author: Christopher Brown
+Authors@R: "Christopher Brown <chris.brown@decisionpatterns.com> [aut, cre]"
 Maintainer: Christopher Brown <chris.brown@decisionpatterns.com>
 Depends:
     R (>= 3.0.2)
