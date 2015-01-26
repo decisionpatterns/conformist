@@ -10,7 +10,7 @@
 #' @param unique logical; if TRUE, the resulting elements are unique. This may be 
 #' desired for, e.g., column names.
 #' 
-#' @param leading_ What to replace leading '_' and '.'
+#' @param leading_ What to replace leading '_' and '.' with
 #' 
 #' Calls \code{nake.names} and then replaces \code{.} by \code{_}
 #' See \code{\link[base]{make.names}} for details.
@@ -27,23 +27,26 @@
 #' @return a character vector containing  
 #'
 #' @references 
-#'   http://en.wikipedia.com/Snake_case
-#'   http://titlecase.com
+#'   \url{http://en.wikipedia.com/Snake_case}
+#'   \url{http://titlecase.com}
 #' 
 #' @author Christopher Brown   
 #' 
 #' @seealso \code{\link[base]{make.names}}, \code{\link[base]{make.unique}}
 #' 
 #' @examples
-#'   make_names(c("a and b", "a-and-b"), unique = TRUE)
-#'   # "a_and_b"   "a_and_b_1"
-#'   make_names(c("a and b", "a.and_b"), unique = TRUE)
-#'   # "a.and.b"  "a_and_b"
-#'   make_names(c("a and b", "a.and_b"), unique = TRUEn)
-#'   # "a_and_b"   "a_and_b_1"
-#'   make_names( c(".a", "_b") )  # "a" "b"
+#'   make_names(c("foo and bar", "foo-and-bar"), unique = TRUE)
+#'   # "foo_and_bar"   "foo_and_bar_1"
+#'   
+#'   make_names(c("foo and bar", "foo.and_bar"), unique = TRUE)
+#'   # "foo.and.bar"  "foo_and_bar"
+#'   
+#'   make_names(c("foo and bar", "foo.and_bar"), unique = TRUEn)
+#'   # "foo_and_bar"   "foo_and_bar_1"
+#'   
+#'   make_names( c(".foo", "_bar") )  # "foo" "bar"
 #' 
-#'   make_names( c(".a", "_b"), leading="." )  # "a" "b" 
+#'   make_names( c(".foo", "_bar"), leading="." )  # "foo" "bar" 
 #' 
 #' @export
 
@@ -59,7 +62,9 @@ make_names <- function( names, unique=FALSE, leading_ = '' ) {
      names <- sub( '^_', '.', names )
      names <- make.names( names, allow_ = TRUE )
      names <- gsub( '\\.', '_', names )
-     names <- gsub( "\\_+", "_", names ) 
+     names <- gsub( "\\_+", "_", names )
+   
+     if( unique ) names <- make.unique( names, sep="_")
  
    # REPLACE LEADING CHAR BY leading_ 
      substr( names[ leading ], 1, 1 ) = leading_ 
