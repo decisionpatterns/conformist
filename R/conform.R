@@ -24,21 +24,7 @@
 #' 
 #' @author Christopher Brown
 #' 
-#' @return same type of object as 
-#' 
-#' Makes a standardized name for the arguments 
-#' 
-#' The standard naming convention to:
-#'  - use all lower.case charcters for names
-#'  - replace '.' with '_'
-#'  - replace ' ' with '_'
-#'  
-#'  Name suffixes:
-#'  - _date => _dt
-#'  - _amount => _amt
-#'  - _count => _cnt
-#' 
-#' There are special meaning in the conformed names.
+#' @return same type of object as \code{x} with its property set by conform
 #' 
 #' @examples
 #'   data(iris)
@@ -52,6 +38,7 @@ conform <- function( x, ...) UseMethod( "conform" )
 
 #' @rdname conform
 #' @import lettercase
+#' @export
 conform.character <- function(
   x
   , fun = getOption(
@@ -71,6 +58,7 @@ conform.character <- function(
 
 
 #' @rdname conform
+#' @export
 conform.data.frame <- function(x, ...) {
   names(x) <- conform( names(x), ... )
   return(x)
@@ -79,6 +67,7 @@ conform.data.frame <- function(x, ...) {
 
 #' @rdname conform
 #' @import data.table
+#' @export
 conform.data.table <- function(x, ...) {
   setnames( x, names(x), conform(names(x), ...) )
   return(x)
