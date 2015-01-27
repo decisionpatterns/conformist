@@ -11,6 +11,7 @@
 #' given by \code{x}. If there is no matrching name found, the value  provided 
 #' in the \code{missing} argument is used.   
 #' 
+#' It is not uncommon to set \code{missing} to  
 #' 
 #' @return 
 #'   one or more values looked up by name in the dictionary. There is no 
@@ -37,6 +38,6 @@ lookup <- function( x, dict, missing=NA ) {
    
    if(all(!wh)) return(missing)
    
-   return(dict[wh])
+   return( dict[wh] )
   
 }

@@ -47,17 +47,11 @@
 #' @rdname conform
 #' @export
 
-conform <- function( 
-    x
-  # , dict=getOption('conform.dictionary', NULL)
-  # , tokenizer=NULL
-  , ...
-) UseMethod( "conform" ) 
+conform <- function( x, ...) UseMethod( "conform" ) 
 
 
 #' @rdname conform
 #' @import lettercase
-
 conform.character <- function(
   x
   , fun = getOption(
@@ -67,8 +61,6 @@ conform.character <- function(
           lettercase::str_snake_case  %>% 
           lettercase::make_names
     )
-  # , dict=getOption('conform.dictionary', NULL)
-  # , tokenizer = NULL
   , ...
 ) {
 
@@ -79,26 +71,15 @@ conform.character <- function(
 
 
 #' @rdname conform
-conform.data.frame <- function(
-  x
-  # , dict=getOption('conform.dictionary', NULL)
-  # , tokenizer = NULL
-  , ...
-) {
+conform.data.frame <- function(x, ...) {
   names(x) <- conform( names(x), ... )
   return(x)
 }
 
 
-
 #' @rdname conform
 #' @import data.table
-conform.data.table <- function(
-  x
-  # , dict=getOption('conform.dictionary', NULL)
-  # , tokenizer = NULL
-  , ...
-) {
+conform.data.table <- function(x, ...) {
   setnames( x, names(x), conform(names(x), ...) )
   return(x)
 }
