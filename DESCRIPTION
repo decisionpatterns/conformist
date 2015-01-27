@@ -2,16 +2,19 @@ Package: conformist
 Title: Utilities for conforming data to predefined standards
 Description: Utilities for conforming data to flexible, predefined standards
     such a the lettercase for names, types for columns etc.
-Version: 0.2
-Date: 2015-01-10
-Imports:
-    lettercase (>= 0.1)
+Version: 0.3
+Date: 2015-01-26
 Authors@R: "Christopher Brown <chris.brown@decisionpatterns.com> [aut, cre]"
 Maintainer: Christopher Brown <chris.brown@decisionpatterns.com>
 Depends:
-    R (>= 3.0.2)
+    R (>= 3.0.2),
+    magrittr (>= 1.5)
+Imports:
+    lettercase (>= 0.11),
+    stringr,
+    data.table (>= 1.9.4),
 Suggests:
     testthat,
-    data.table (>= 1.9.4)
+    hash(>= 2.2.6)
 License: Decision Patterns Client License
-LazyData: true
+LazyData: yes
