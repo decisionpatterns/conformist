@@ -40,10 +40,8 @@
 
 abbreviate <- function( 
   string
-  , dict=getOption( 'conform.abbreviations', abbreviations )
+  , dict=getOption( 'abbreviations', abbreviations )
   , tokenizer=NULL
-#   , ... 
-#   , lookup.rules = getOption( 'conform.lookup', . %>% exact %>% ignore.case )
 ) { 
 
   # SPLIT string BY tokenizer 

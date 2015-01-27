@@ -31,8 +31,9 @@
 #'   
 #'   
 #' @import stringr
+#' @export
 
-lookup <- function( x, dict, missing=NA ) { 
+lookup <- function( x, dict=getOption('dictionary',abbreviations), missing=NA ) { 
 
    wh <- stringr::str_detect( names(dict), x ) 
    
