@@ -1,9 +1,9 @@
 context('conform')
 library(magrittr)
+library(lettercase)
 
 data(iris)
-iris %>% conform %>% names %>% tail(1) %>%
-  expect_equal( 'spcs' )
+iris %>% conform %>% names %>% tail(1) %>% expect_equal( 'species' )
    
 iris %>% conform( fun= .  %>% str_uppercase ) %>% names  %>% tail(1) %>%
   expect_equal( 'SPECIES')

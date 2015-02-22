@@ -1,18 +1,24 @@
 #' Abbreviate strings or tokens
 #' 
-#' Abbreviates strings or string tokens by matching against a dictionary
+#' Abbreviates strings by (optionally) tokenizing and matching token 
+#' against a dictionary
 #' 
 #' @param string character; string to attempt to abbreviate
 #' 
 #' @param dict dictionary-like object; uses global options 
 #' 'confirm.abbreviations' or else the \code{\link{abbreviations}}
 #' 
-#' @param tokenizer character; separator to split strings with, usually 
-#' \code{'_'} or \code{' '}. If \code{NULL}, the default, strings will not be
-#' split.
+#' @param tokenizer character; pattern passed to 
+#' \code{\link[stringr]{str_split}} to split strings with, usually \code{'_'} 
+#' or \code{' '}. If \code{NULL}, the default, strings will not be split. 
 #' 
 # @param ... additional arguments passed to \code{\link{lookup}}.
 # 
+#' @details
+#' 
+#' \code{abbreviate} works by first finding a list of tokens that occur in the 
+#' code. 
+#' 
 #' x can be adorned with match modifiers to control the type of match. See 
 #' \code{\link{lookup}} for details.
 #' 
@@ -24,7 +30,8 @@
 #' 
 #' @seealso 
 #'   \code{\link{lookup}} \cr
-#'   \code{\link{abbreviations}} 
+#'   \code{\link{abbreviations}} \cr
+#'   \code{\link[stringr]{str_split}}
 #'      
 #' @examples
 #'   string <- c( 'foo bar', 'foo amount', 'amount', 'amount count date' )
@@ -40,8 +47,8 @@
 
 abbreviate <- function( 
   string
-  , dict=getOption( 'abbreviations', abbreviations )
-  , tokenizer=NULL
+  , dict      = getOption( 'abbreviations', abbreviations )
+  , tokenizer = NULL
 ) { 
 
   # SPLIT string BY tokenizer 
@@ -49,19 +56,28 @@ abbreviate <- function(
     
     strings <- str_split(string, tokenizer)
 
-    for ( i in 1:length(strings) ) { 
-      strings[[i]] <- strings[[i]] %>% sapply( function(x) 
-        x %>% 
-          exact  %>% 
-          ignore.case  %>% 
-          lookup(dict, missing=x ) %>% 
-          head(1) 
-      )
-    }
+    # IDENTIFY TOKENS TO BE REPLACED
+    replacements <- 
+      str_split( string, tokenizer ) %>% unlist %>% unique %>%    # get tokens
+      sapply( . %>% exact %>% ignore.case %>% lookup(dict) ) %>%  # lookup tokens
+      sapply( . %>% extract2(1) ) %>%                             # retain first hit only  
+      na.omit
     
-    # RETOKEN
-    string <- strings %>% sapply( function(x) paste0( x, collapse=tokenizer ) )
-  
+    
+    # REPLACE TOKENS
+    #   Look behind and forward assertions are used to augment the token matching
+    if( length(replacements) > 0 ) 
+      for( i in 1:length(replacements) ) { 
+        pattern <- names(replacements)[[i]]
+        pattern <- paste0( "(?<=^|", tokenizer, ")", pattern, "(?=$|", tokenizer, ")" )
+        string <- 
+          str_replace_all( 
+              string
+            , pattern = perl(pattern) 
+            , replacements[[i]] 
+          )
+      }
+    
   # DO NOT TOKENIZE  
   } else { 
   

@@ -10,7 +10,7 @@
 #'   the regular expression matches the entire pattern.
 #' 
 #' @note 
-#'   This is a poor substitute for being implemented within \code{stringr}.  See
+#'   This is a poor substitute for being implemented within \code{stringr}. See
 #'   \url{https://github.com/hadley/stringr/issues/55}
 #' 
 #' @references

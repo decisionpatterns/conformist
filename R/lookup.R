@@ -2,10 +2,10 @@
 #'
 #' @param x string; one-element character vector 
 #' 
-#' @param object object that has a names attribute that is used to look up the 
+#' @param dict object that has a names attribute that is used to look up the 
 #' associated values. 
 #' 
-#' @param missing; value to return if the 
+#' @param missing value to return if the value cannot be found, (DEFAULT: NA)
 #' 
 #' Looks up and returns the item(s) in \code{dict} matching the pattern 
 #' given by \code{x}. If there is no matrching name found, the value  provided 
@@ -15,7 +15,7 @@
 #' 
 #' @return 
 #'   one or more values looked up by name in the dictionary. There is no 
-#'   guarantee that 
+#'   guarantee that there will be only one item returned per-lookup
 #' 
 #' @seealso 
 #'   \code{\link[stringr]{str_detect}} which is used internally to match 

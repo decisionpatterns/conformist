@@ -2,8 +2,8 @@ Package: conformist
 Title: Utilities for conforming data to predefined standards
 Description: Utilities for conforming data to flexible, predefined standards
     such a the lettercase for names, types for columns etc.
-Version: 0.3.2
-Date: 2015-01-27
+Version: 0.3.3
+Date: 2015-02-22
 Authors@R: "Christopher Brown <chris.brown@decisionpatterns.com> [aut, cre]"
 Maintainer: Christopher Brown <chris.brown@decisionpatterns.com>
 Depends:
@@ -12,7 +12,7 @@ Depends:
     magrittr (>= 1.5)
 Imports:
     lettercase (>= 0.11),
-    data.table (>= 1.9.4),
+    data.table (>= 1.9.4)
 Suggests:
     testthat,
     hash(>= 2.2.6)
