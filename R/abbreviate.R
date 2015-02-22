@@ -42,7 +42,7 @@
 #'   # Tokenizes sting and matches against the token
 #'   string %>% abbreviate(tokenizer=" ")
 #'   
-#' @import magrittr
+# @import magrittr
 #' @export
 
 abbreviate <- function( 

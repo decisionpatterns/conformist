@@ -1,6 +1,6 @@
-library(testthat)
-library(conformist)
 library(magrittr)
+library(testthat)
+library(lettercase)
 
 context('abbreviate')
 

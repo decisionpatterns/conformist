@@ -33,7 +33,7 @@
 #' spacing.
 #' 
 #' @name conformist
-#' @import magrittr
+# @import magrittr  
 #' @docType package
 
 NULL
