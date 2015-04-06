@@ -54,11 +54,12 @@ abbreviate <- function(
   # SPLIT string BY tokenizer 
   if( ! is.null(tokenizer) ) {
     
-    strings <- str_split(string, tokenizer)
+    strings <- stringr::str_split(string, tokenizer)
 
     # IDENTIFY TOKENS TO BE REPLACED
-    replacements <- 
-      str_split( string, tokenizer ) %>% unlist %>% unique %>%    # get tokens
+    tokens <- str_split( string, tokenizer ) %>% unlist %>% unique     # get tokens
+      
+    replacements <- tokens %>%
       sapply( . %>% exact %>% ignore.case %>% lookup(dict) ) %>%  # lookup tokens
       sapply( . %>% extract2(1) ) %>%                             # retain first hit only  
       na.omit

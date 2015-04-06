@@ -44,7 +44,7 @@ conform.character <- function(
   , fun = getOption(
         'conform'
       , . %>% 
-          abbreviate(tokenizer=" ") %>% 
+          abbreviate(tokenizer="[ _]") %>% 
           lettercase::str_snake_case  %>% 
           lettercase::make_names
     )

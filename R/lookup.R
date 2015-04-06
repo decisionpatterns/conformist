@@ -18,23 +18,28 @@
 #'   guarantee that there will be only one item returned per-lookup
 #' 
 #' @seealso 
-#'   \code{\link[stringr]{str_detect}} which is used internally to match 
+#'   
+#'   \code{\link[searchable]{extract}} which is used internally to match 
 #'   names
 #'    
 #' @examples
 #'   dict <- 1:26 
 #'   names(dict) <- letters
+#'   dict <- dict %>% searchable %>% ignore.case
+#'   
 #'   
 #'   lookup( ignore.case('M'), dict )    # 13
 #'   lookup( 'M', dict )                 # NA
 #'   lookup( 'M', dict, 'M' )            # M
-#'   
 #'   
 #' @import stringr
 #' @export
 
 lookup <- function( x, dict=getOption('dictionary',abbreviations), missing=NA ) { 
 
+   # message( "'lookup' is deprecated, use standard accessors instead. See the 'searchable' package for details." )
+   
+   dict[x]
    wh <- stringr::str_detect( names(dict), x ) 
    
    if(all(!wh)) return(missing)

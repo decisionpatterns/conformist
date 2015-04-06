@@ -8,11 +8,14 @@
 #'   
 #'   "data-raw/abbreviations.txt"  %>% .load_abbreviations -> x
 #'  
-#'  # TO 
+#'  # 
 #'   abbreviations <-
 #'     "data-raw/abbreviations.txt"  %>% 
-#'     .load_abbreviations 
-#'     save( abbreviations, file="data/abbreviations.rda" )
+#'     .load_abbreviations %>%
+#'      searchable %>%
+#'      ignore.case
+#'     
+#'   save( abbreviations, file="data/abbreviations.rda" )
 #'     
 #' @rdname internal
 
