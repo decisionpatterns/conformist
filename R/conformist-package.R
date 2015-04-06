@@ -34,7 +34,6 @@
 #' spacing.
 #' 
 #' @name conformist
-# @import magrittr  
 #' @docType package
 
 NULL

@@ -1,3 +1,10 @@
+#' @import stringi
+#' @import magrittr
+#' @import searchable
+
+
+NULL
+
 #' Abbreviate strings or tokens
 #' 
 #' Abbreviates strings by (optionally) tokenizing and matching token 
@@ -42,6 +49,8 @@
 #'   # Tokenizes sting and matches against the token
 #'   string %>% abbreviate(tokenizer=" ")
 #'   
+#'   abbreviate( c('product_year', "dollar_range"), abbreviations, tokenizer = '_')
+#'   
 # @import magrittr
 #' @export
 
@@ -50,21 +59,19 @@ abbreviate <- function(
   , dict      = getOption( 'abbreviations', abbreviations )
   , tokenizer = NULL
 ) { 
-
+  
+  # browser()
   # SPLIT string BY tokenizer 
+  
   if( ! is.null(tokenizer) ) {
     
-    strings <- stringr::str_split(string, tokenizer)
+    # strings <- stringi::stri_split_regex(string, tokenizer)
 
     # IDENTIFY TOKENS TO BE REPLACED
-    tokens <- str_split( string, tokenizer ) %>% unlist %>% unique     # get tokens
+    tokens <- stringi::stri_split_regex( string, tokenizer ) %>% unlist %>% unique     # get tokens
       
-    replacements <- tokens %>%
-      sapply( . %>% exact %>% ignore.case %>% lookup(dict) ) %>%  # lookup tokens
-      sapply( . %>% extract2(1) ) %>%                             # retain first hit only  
-      na.omit
-    
-    
+    replacements <- dict[tokens]
+
     # REPLACE TOKENS
     #   Look behind and forward assertions are used to augment the token matching
     if( length(replacements) > 0 ) 
@@ -72,10 +79,11 @@ abbreviate <- function(
         pattern <- names(replacements)[[i]]
         pattern <- paste0( "(?<=^|", tokenizer, ")", pattern, "(?=$|", tokenizer, ")" )
         string <- 
-          str_replace_all( 
+          stringi::stri_replace_all_regex( 
               string
-            , pattern = perl(pattern) 
+            , pattern = pattern 
             , replacements[[i]] 
+            , opts_regex = list( case_insensitive = TRUE ) 
           )
       }
     
@@ -83,11 +91,8 @@ abbreviate <- function(
   } else { 
   
     for( i in 1:length(string) ) {
-      string[[i]] <- string[[i]] %>% 
-                     exact  %>%  
-                     ignore.case %>%  
-                     lookup( dict, missing=string[[i]] ) %>%
-                     head(1)
+      replace <- dict[ string[[i]] ]
+      if( length(replace) > 0 ) string[[i]] <- replace[[1]] 
     }               
   
   }
