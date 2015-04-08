@@ -1,5 +1,4 @@
 #' @import stringi
-# @import searchable
 
 NULL
 

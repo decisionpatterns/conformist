@@ -1,3 +1,6 @@
+#' @import data.table
+NULL
+
 #' Conform
 #' 
 #' Conform an object to internal standards
@@ -40,7 +43,6 @@ function(x)
   lettercase::make_names( str_snake_case( abbreviate(x, tokenizer="[_ ]") ) )
 
 #' @rdname conform
-#' @import lettercase
 #' @export
 conform.character <- function(
   x
@@ -67,7 +69,6 @@ conform.data.frame <- function(x, ...) {
 
 
 #' @rdname conform
-#' @import data.table
 #' @export
 conform.data.table <- function(x, ...) {
   setnames( x, names(x), conform(names(x), ...) )
