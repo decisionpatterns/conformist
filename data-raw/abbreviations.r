@@ -15,7 +15,7 @@
 #'      searchable %>%
 #'      ignore.case
 #'     
-#'   save( abbreviations, file="data/abbreviations.rda" )
+#'   devtools::use_data( abbreviations )
 #'     
 #' @rdname internal
 

@@ -18,4 +18,13 @@
 #'   
 #' @export   
 
-exact <- function(pattern) paste0( "^", pattern, "$" )
+exact <- function(pattern) {
+  if( 
+    ! class(pattern) == 'Pattern' ||
+    pattern@type == 'regex' 
+  ) 
+    stop( "Exact only works for regex patterns" )
+    
+    pattern@.Data <- paste0( "^", pattern, "$" )
+    pattern
+  }
