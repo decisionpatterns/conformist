@@ -25,8 +25,8 @@
 #' @examples
 #'   dict <- 1:26 
 #'   names(dict) <- letters
-#'   dict <- dict %>% searchable %>% ignore.case
-#'   
+#'   dict <- searchable(dict) 
+#'   dict <- ignore.case(dict)
 #'   
 #'   lookup( ignore.case('M'), dict )    # 13
 #'   lookup( 'M', dict )                 # NA

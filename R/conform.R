@@ -35,6 +35,9 @@
 
 conform <- function( x, ...) UseMethod( "conform" ) 
 
+.conform.default <-
+function(x) 
+  lettercase::make_names( str_snake_case( abbreviate(x, tokenizer="[_ ]") ) )
 
 #' @rdname conform
 #' @import lettercase
@@ -43,10 +46,8 @@ conform.character <- function(
   x
   , fun = getOption(
         'conform'
-      , . %>% 
-          abbreviate(tokenizer="[ _]") %>% 
-          lettercase::str_snake_case  %>% 
-          lettercase::make_names
+      , function(x) 
+        lettercase::make_names( str_snake_case( abbreviate(x, tokenizer="[_ ]") ) )
     )
   , ...
 ) {
@@ -72,3 +73,5 @@ conform.data.table <- function(x, ...) {
   setnames( x, names(x), conform(names(x), ...) )
   return(x)
 }
+
+

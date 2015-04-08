@@ -1,7 +1,5 @@
 #' @import stringi
-#' @import magrittr
-#' @import searchable
-
+# @import searchable
 
 NULL
 
@@ -42,16 +40,15 @@ NULL
 #'      
 #' @examples
 #'   string <- c( 'foo bar', 'foo amount', 'amount', 'amount count date' )
-#'   
-#'   # Attempts to lookup entire string
-#'   string  %>% abbreviate   
-#'   
+#'    
+#'   # Attempts to abreviate entire string
+#'   abbreviate(string)
+#'     
 #'   # Tokenizes sting and matches against the token
-#'   string %>% abbreviate(tokenizer=" ")
+#'   abbreviate(string, tokenizer=" ")
 #'   
 #'   abbreviate( c('product_year', "dollar_range"), abbreviations, tokenizer = '_')
 #'   
-# @import magrittr
 #' @export
 
 abbreviate <- function( 
@@ -68,7 +65,8 @@ abbreviate <- function(
     # strings <- stringi::stri_split_regex(string, tokenizer)
 
     # IDENTIFY TOKENS TO BE REPLACED
-    tokens <- stringi::stri_split_regex( string, tokenizer ) %>% unlist %>% unique     # get tokens
+    tokens <- 
+      unique( unlist( stringi::stri_split_regex(string, tokenizer) ) )
       
     replacements <- dict[tokens]
 
