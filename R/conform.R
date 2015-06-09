@@ -12,11 +12,18 @@ NULL
 #' 
 #' @param fun function to perform the conformation. The default is to look 
 #' for the global conformation function: \code{getOptions('conform')}
-#' 
+#'
+#' @details  
+#'  
 #' \code{conform} provides a very abstract way to ensure that all names
 #' follow a predefined convention.   
 #'
-#' 
+#' The default conformation ... \cr
+#'   trims whitespace, 
+#'   abbreviates words, 
+#'   enforces snake_case. 
+#'   and makes_names
+#'   
 #' @note
 #' DP naming standards are lowercase, underscores('_') for whitespace 
 #' (not periods('.'), leading dot is retained 
@@ -40,7 +47,7 @@ conform <- function( x, ...) UseMethod( "conform" )
 
 .conform.default <-
 function(x) 
-  lettercase::make_names( str_snake_case( abbreviate(x, tokenizer="[_ ]") ) )
+  lettercase::make_names( str_snake_case( abbreviate( stringi::stri_trim_both(x), tokenizer="[_ ]") ) )
 
 #' @rdname conform
 #' @export
@@ -49,7 +56,8 @@ conform.character <- function(
   , fun = getOption(
         'conform'
       , function(x) 
-        lettercase::make_names( str_snake_case( abbreviate(x, tokenizer="[_ ]") ) )
+        lettercase::make_names( str_snake_case( abbreviate( stringi::stri_trim_both(x), tokenizer="[_ ]") ) )
+
     )
   , ...
 ) {

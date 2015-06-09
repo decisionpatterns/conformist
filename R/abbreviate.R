@@ -66,6 +66,8 @@ abbreviate <- function(
     # IDENTIFY TOKENS TO BE REPLACED
     tokens <- 
       unique( unlist( stringi::stri_split_regex(string, tokenizer) ) )
+    
+    tokens <- tokens[ tokens != "" ]  # No empty tokens
       
     replacements <- dict[tokens]
 

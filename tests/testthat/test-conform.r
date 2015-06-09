@@ -14,3 +14,7 @@ iris %>% conform( fun= .  %>% str_uppercase ) %>% names  %>% tail(1) %>%
 "Mission.Of.Burma" %>% conform %>% expect_equal( "mission_of_burma" ) 
   
 "Catch-22" %>% conform %>% expect_equal( "catch_22" ) 
+
+
+# TEST TRIM WHITE SPACE
+  " hello world " %>% conform %>% expect_equal('hello_wrld')
