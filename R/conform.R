@@ -47,7 +47,9 @@ conform <- function( x, ...) UseMethod( "conform" )
 
 .conform.default <-
 function(x) 
-  lettercase::make_names( str_snake_case( abbreviate( stringi::stri_trim_both(x), tokenizer="[_ ]") ) )
+  lettercase::make_names( 
+    str_snake_case( abbreviate( stringi::stri_trim_both(x)) ) 
+  )
 
 #' @rdname conform
 #' @export

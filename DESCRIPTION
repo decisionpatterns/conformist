@@ -2,8 +2,8 @@ Package: conformist
 Title: Utilities for conforming data to predefined standards
 Description: Utilities for conforming data to flexible, predefined standards
     such as the case for names, types for columns etc.
-Version: 0.4.2
-Date: 2015-06-09
+Version: 0.4.3
+Date: 2015-12-14
 Authors@R: "Christopher Brown <chris.brown@decisionpatterns.com> [aut, cre]"
 Maintainer: Christopher Brown <chris.brown@decisionpatterns.com>
 Depends:
