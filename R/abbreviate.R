@@ -1,7 +1,3 @@
-#' @import stringi
-
-NULL
-
 #' Abbreviate strings or tokens
 #' 
 #' Abbreviates strings by (optionally) tokenizing and matching token 
@@ -16,8 +12,6 @@ NULL
 #' \code{\link[stringr]{str_split}} to split strings with, usually \code{'_'} 
 #' or \code{' '}. If \code{NULL}, the default, strings will not be split. 
 #' 
-# @param ... additional arguments passed to \code{\link{lookup}}.
-# 
 #' @details
 #' 
 #' \code{abbreviate} works by first finding a list of tokens that occur in the 
@@ -48,7 +42,9 @@ NULL
 #'   
 #'   abbreviate( c('product_year', "dollar_range"), abbreviations, tokenizer = '_')
 #'   
+#' @import stringi
 #' @export
+
 
 abbreviate <- function( 
   string
@@ -59,6 +55,7 @@ abbreviate <- function(
   # browser()
   # SPLIT string BY tokenizer 
   
+  # TOKENIZE
   if( ! is.null(tokenizer) ) {
     
     # strings <- stringi::stri_split_regex(string, tokenizer)
