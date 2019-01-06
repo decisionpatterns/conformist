@@ -53,19 +53,8 @@ function(x)
 
 #' @rdname conform
 #' @export
-conform.character <- function(
-  x
-  , fun = getOption(
-        'conform'
-      , function(x) 
-        lettercase::make_names( str_snake_case( abbreviate( stringi::stri_trim_both(x), tokenizer="[_ ]") ) )
-
-    )
-  , ...
-) {
-
+conform.character <- function(x, fun = getOption( 'conform', conformist ), ...) {
   return( fun(x) )
-  
 }
 
 
