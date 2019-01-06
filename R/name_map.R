@@ -13,21 +13,17 @@
 #' @examples
 #' 
 #'   iris %>% name_map(conformist)
-#' 
+#'   iris %>% setDT() %>% name_map(conformist)
 #'  
 #' @export 
 
 name_map <- function(data, fun)  { 
 
-  d <- copy(data)
-  
-  nms.old <- names(d)
-  nms.new <- d %>% conform(fun) %>% names 
-  
-  ret <- data.frame( old=nms.old, new=nms.new )
-  
-  if( is.data.table(data) ) setDT(ret)
-  
+  nms.old <- data %>% copy() %>% names()
+  nms.new <- data %>% copy() %>% conform(fun) %>% names
+  ret <- data.frame(old = nms.old, new = nms.new)
+  if (is.data.table(data)) 
+    setDT(ret)
   ret
   
 }
